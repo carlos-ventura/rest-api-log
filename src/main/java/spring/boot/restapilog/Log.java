@@ -1,54 +1,44 @@
 package spring.boot.restapilog;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Log {
 
-    private final long applicationId;
-    private final long traceId;
-    private final String severity;
+    private @Id @GeneratedValue Long applicationId;
+    private long traceId;
+    private String severity;
     // Start simple
-    private final String timestamp;
-    private final String message;
+    private String timestamp;
+    private String message;
     private String componentName;
     private long requestId;
 
-    public Log(long applicationId, long traceId, String severity, String timestamp, String message) {
-        this.applicationId = applicationId;
+    public Log() {}
+
+    public Log(long traceId, String severity, String timestamp, String message) {
         this.traceId = traceId;
         this.severity = severity;
         this.timestamp = timestamp;
         this.message = message;
     }
 
-    public Log(long applicationId, long traceId, String severity, String timestamp, String message, long requestId) {
-        this.applicationId = applicationId;
-        this.traceId = traceId;
-        this.severity = severity;
-        this.timestamp = timestamp;
-        this.message = message;
+    public Log(long traceId, String severity, String timestamp, String message, long requestId) {
+        this(traceId, severity, timestamp, message);
         this.requestId = requestId;
     }
 
-    public Log(long applicationId, long traceId, String severity, String timestamp, String message, String componentName) {
-        this.applicationId = applicationId;
-        this.traceId = traceId;
-        this.severity = severity;
-        this.timestamp = timestamp;
-        this.message = message;
+    public Log(long traceId, String severity, String timestamp, String message, String componentName) {
+        this(traceId, severity, timestamp, message);
         this.componentName = componentName;
     }
 
-    public Log(long applicationId, long traceId, String severity, String timestamp, String message, String componentName, long requestId) {
-        this.applicationId = applicationId;
-        this.traceId = traceId;
-        this.severity = severity;
-        this.timestamp = timestamp;
-        this.message = message;
+    public Log(long traceId, String severity, String timestamp, String message, String componentName, long requestId) {
+        this(traceId, severity, timestamp, message);
         this.componentName = componentName;
         this.requestId = requestId;
-    }
-
-    public long getApplicationId() {
-        return applicationId;
     }
 
     public long getTraceId() {
